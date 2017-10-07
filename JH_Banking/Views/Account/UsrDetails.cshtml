@@ -1,0 +1,149 @@
+﻿@model JH_Banking.Models.UserAccount
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Profile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("User ID")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("First Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Last Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("PID")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PidNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Place of Birth")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Citizenship)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Citizenship)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Number of Descriptive")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfDescriptive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Town)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Town)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+    </dl>
+    <h4>Mailing Address</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Street")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailStreet)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Number of Descriptive")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailNumberOfDescriptive)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Town")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailTown)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("ZIP")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailZip)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "UsrEdit")
+</p>

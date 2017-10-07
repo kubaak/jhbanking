@@ -1,0 +1,139 @@
+﻿@model JH_Banking.Models.Transaction
+
+@{
+    ViewBag.Title = "Create Transaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+//    AjaxOptions ajaxOpt = new AjaxOptions() { UpdateTargetId = "paymentBody" };
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Transaction</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("Account Number*", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.AccNum, ViewBag.BankAccounts as SelectList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Templates", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("selectedTemplate", ViewBag.Templates as SelectList,"Select Template", new { @class = "form-control", @id = "dropDownTemplates"})
+            </div>
+        </div>
+        
+        <div id="paymentBody">
+            @*This will be loaded with AJAX*@
+            <div class="form-group">
+                @Html.Label("To Account*", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DestAccNum, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DestAccNum, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Bank Code*", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DestBankCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DestBankCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Amount*", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Due Date*", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", @Value = @DateTime.Today.ToString("dd/MM/yyyy")} })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <p>* - fields are mandatory</p>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5">
+                <div class="g-recaptcha" data-sitekey="6LcE2BAUAAAAAAkcSbyfv5gc6nNOEj6NgC8r56-Y"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-7 col-md-5">
+                <label for="templName">Template Name</label>
+                <input type="text" id="templName" class="form-control" />
+                <button id="saveTemplate" class="btn btn-default" type="button">Save as Template</button>
+            </div>
+        </div>
+        <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+  
+        $('#dropDownTemplates').change(function () {
+
+            var selId = $('#dropDownTemplates option:selected').val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Template/TemplateData",
+                data: { selectedTemplate: selId },
+                success: function (data) {
+                    $('#paymentBody').html(data);
+                },
+                error: function () {
+                    alert('There were some error.');
+                }
+            })
+        });
+
+        $('#saveTemplate').click(function () {
+            
+            var temlate = {
+                TemplName: $('#templName').val(),
+                AccNum: $('#AccNum option:selected').val(),
+                DestAccNum: $('#DestAccNum').val(),
+                DestBankCode: $('#DestBankCode').val(),
+                Amount: $('#Amount').val(),
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Template/CreateAjax",
+                data: temlate,
+                success: function (data) {
+                    alert('Template has been added.');
+                },
+                error: function () {
+                    alert('There were some errors.');
+                }
+            });
+
+        });
+    });
+</script>
+<script src='https://www.google.com/recaptcha/api.js'></script>

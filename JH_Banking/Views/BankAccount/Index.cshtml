@@ -1,0 +1,48 @@
+﻿@model IEnumerable<JH_Banking.Models.BankAccount>
+
+@{
+    ViewBag.Title = "Bank Accounts";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",new {userId = ViewBag.userId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayName("Paycard Number")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardNum)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AccId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AccId })
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Back to List of User Accounts", "Index","Account")
+</div>

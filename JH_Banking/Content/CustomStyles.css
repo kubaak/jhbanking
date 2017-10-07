@@ -1,0 +1,50 @@
+﻿body {
+    padding-top: 50px;
+}
+
+.noLeftPadding{
+    padding-left: 0px;
+}
+.panel-default > .panel-heading {
+  background-color: lightpink;
+}
+
+.noRightPadding{
+    padding-right: 0px;
+}
+
+.navbar-default {
+    background-color: lightpink;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: white;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: white;
+}
+
+.text-primary {
+    color: mediumvioletred;
+}
+
+.text-info {
+    color: mediumvioletred;
+}
+
+.well {
+    background-color: lightpink;
+}
+
+.carousel-indicators li {
+    background-color: lightpink;
+}
+
+.carousel-indicators .active {
+        background-color: lightpink;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: lightyellow;
+}

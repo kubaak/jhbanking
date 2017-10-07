@@ -1,0 +1,42 @@
+﻿@model IEnumerable<JH_Banking.Models.BankAccount>
+
+@{
+    ViewBag.Title = "Your Bank Accounts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Bank Accounts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Account Number")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayName("Paycard Number")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardNum)
+        </td>
+        <td>
+            @Html.ActionLink("Transaction History", "Index","Transaction", new { AccId = item.AccId },null) |
+            @Html.ActionLink("New Transaction", "Create", "Transaction", new { AccId = item.AccId }, null)
+        </td>
+    </tr>
+}
+
+</table>

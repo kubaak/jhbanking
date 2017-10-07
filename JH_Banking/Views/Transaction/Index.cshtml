@@ -1,0 +1,64 @@
+﻿@model IEnumerable<JH_Banking.Models.Transaction>
+
+@{
+    ViewBag.Title = "Transaction History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transaction History</h2>
+
+<p>
+    @Html.ActionLink("Create New Transaction", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayName("From Account")
+        </th>
+        <th>
+            @Html.DisplayName("To Account")
+        </th>
+        <th>
+            @Html.DisplayName("Bank Code")
+        </th>
+        <th>
+            @Html.DisplayName("Due Date")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+
+    </tr>
+@if (Model !=null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestAccNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestBankCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+
+        </tr>
+    }
+}
+
+
+</table>
